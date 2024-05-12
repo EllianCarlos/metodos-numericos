@@ -1,13 +1,14 @@
 import numpy as np  ## usando para visualização, operações lineares e calculo de erros
 from utils import vectorize_column_matrice
 
+
 def jacobis_method(A, b, vis, max_iter=10000, tol=1e-3):
   JACOBI_NAME = "Jacobi"
   CONVERGENCE_NAME = "Convergence"
 
   vis.add_method(JACOBI_NAME)
 
-  jacobis_x = np.copy(b)
+  jacobis_x = np.zeros(b.shape)
   last_iter = np.copy(b)
 
   n_iter = 0

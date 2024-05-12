@@ -8,8 +8,8 @@ def gradient_method(A, b, vis, max_iter=10000, tol=1e-6):
 
   vis.add_method(GRAD_NAME)
 
-  x = np.copy(b)
-  last_iter = np.copy(b)
+  x = np.zeros(b.shape)
+  last_iter = np.copy(x)
   r_0 = b - np.dot(A, x)
 
   n_iter = 0
@@ -20,7 +20,8 @@ def gradient_method(A, b, vis, max_iter=10000, tol=1e-6):
   ### error é suficientemente pequeno
   while n_iter < max_iter and error > tol:
     gradient = np.dot(A, x) - b
-    lamb = np.dot(gradient.T, gradient) / np.dot(np.dot(gradient.T, A), gradient)
+    lamb = np.dot(gradient.T, gradient) / np.dot(np.dot(gradient.T, A),
+                                                 gradient)
     x = x - lamb * gradient
     error = np.linalg.norm(x - last_iter, ord=1)
     vis.add_result(GRAD_NAME, CONVERGENCE_NAME, n_iter, error)

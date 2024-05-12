@@ -30,15 +30,21 @@ class Visualizer:
                             self.results[method][name]["y"],
                             label=f'{method}')
     handles.append(plot_handle)
+    plt.title("Comparação entre métodos")
+    plt.xlabel("Número de Iterações")
+    plt.ylabel("Erro absoluto ||x^(k+1) - x^(k)|| ")
     plt.legend(handles, self.results.keys(), loc='upper right')
     plt.show()
 
   def print_all_from_name(self, name):
-    plt.legend(loc='upper right')
     for method in self.results:
       plt.plot(self.results[method][name]["x"],
                self.results[method][name]["y"],
                label=f'{method}')
+    plt.legend(loc='upper right')
+    plt.xlabel("Número de Iterações")
+    plt.title("Comparação entre métodos")
+    plt.ylabel(r"Erro absoluto $||x^{(k+1)} - x^{(k)}||$")
     plt.show()
 
   def set_limits(self, xmin=None, xmax=None, ymin=None, ymax=None):

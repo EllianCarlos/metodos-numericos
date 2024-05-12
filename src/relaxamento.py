@@ -1,20 +1,19 @@
 import numpy as np
 
 
-def relaxation_method(A, b, vis, omega=1.2, max_iter=10000, tol=1e-3):
+def relaxation_method(A, b, vis, omega=1.3, max_iter=10000, tol=1e-3):
   RELAX_NAME = "Relaxamento"
   CONVERGENCE_NAME = "Convergence"
 
   vis.add_method(RELAX_NAME)
 
   x = np.copy(b)
-  last_iter = np.copy(b)
+  last_iter = np.copy(x)
 
   n_iter = 0
   error = 1e6
 
   n = A.shape[0]
-  m = A.shape[1]
 
   ## Duas condições de paradas
   ### número de iterações excede o número máximo de iterações

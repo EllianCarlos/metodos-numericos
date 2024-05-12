@@ -8,8 +8,8 @@ def gauss_seidel_method(A, b, vis, max_iter=10000, tol=1e-3):
 
   vis.add_method(GS_NAME)
 
-  gs_x = np.copy(b)
-  last_iter = np.copy(b)
+  gs_x = np.zeros(b.shape)
+  last_iter = np.copy(gs_x)
 
   n = b.shape[0]
 

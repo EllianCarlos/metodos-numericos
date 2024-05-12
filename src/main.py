@@ -8,17 +8,18 @@ from relaxamento import relaxation_method
 from gradient import gradient_method
 from conjugate_gradient import gradient_conj_square
 
+
 def run_method(name, func, vis, A, b):
   print(f'Running method {name}')
 
-  max_iter = 1000
+  max_iter = 10000
   tol = 1e-6
 
   x = func(A, b, vis, max_iter, tol)
   mse = (np.square(x - x_expected)).mean(axis=0)
   print(f'Mean Squared Error between exptected and found {mse}')
-  
-  print(f'Finished running method {name}') 
+
+  print(f'Finished running method {name}')
 
 
 if __name__ == "__main__":
@@ -37,7 +38,8 @@ if __name__ == "__main__":
   run_method("Gauss-Seidel", gauss_seidel_method, vis, A_input, b_input)
   run_method("Relaxamento", relaxation_method, vis, A_input, b_input)
   run_method("Gradiente", gradient_method, vis, A_input, b_input)
-  run_method("Gradiente Conjugado", gradient_conj_square, vis, A_input, b_input)
+  run_method("Gradiente Conjugado", gradient_conj_square, vis, A_input,
+             b_input)
 
-  vis.set_limits(-1, 80, -0.2, 2.5)
+  vis.set_limits(-1, 30, -0.2, 2.5)
   vis.print_all_from_name("Convergence")
