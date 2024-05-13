@@ -30,7 +30,7 @@ def gauss_seidel_method(A, b, vis, max_iter=10000, tol=1e-3):
           else:
             sum_k_next += A[i][j] * last_iter[j]
       gs_x[i] = (b[i] - sum_k_next - sum_k) / A[i][i]
-    error = np.linalg.norm(gs_x - last_iter, 1)
+    error = np.linalg.norm(gs_x - last_iter, 1) / np.linalg.norm(gs_x, 1)
     vis.add_result(GS_NAME, CONVERGENCE_NAME, n_iter, error)
     last_iter = np.copy(gs_x)
     n_iter += 1

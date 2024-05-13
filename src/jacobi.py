@@ -27,7 +27,7 @@ def jacobis_method(A, b, vis, max_iter=10000, tol=1e-3):
         if i != j:
           sum += A[i][j] * jacobis_x[j]
       jacobis_x[i] = (b[i] - sum) / A[i][i]
-    error = np.linalg.norm(jacobis_x - last_iter, 1)
+    error = np.linalg.norm(jacobis_x - last_iter, 1)/np.linalg.norm(jacobis_x, 1)
     vis.add_result(JACOBI_NAME, CONVERGENCE_NAME, n_iter, error)
     last_iter = np.copy(jacobis_x)
     n_iter += 1

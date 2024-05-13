@@ -2,14 +2,14 @@ import numpy as np  ## usando para visualização, operações lineares e calcul
 from utils import vectorize_column_matrice
 
 
-def gradient_conj(A, b, vis, max_iter=10, tol=1e-3):
-  GRAD_CONJ_NAME = "GC"
+def gradient_conj_square(A, b, vis, max_iter=10, tol=1e-3):
+  GRAD_CONJ_NAME = "CGS"
   CONVERGENCE_NAME = "Convergence"
 
   vis.add_method(GRAD_CONJ_NAME)
 
   x = np.zeros(b.shape)
-  last_iter = np.copy(x)
+  last_iter = np.copy(b)
   d = b - A * x
   r = np.copy(d)
   last_r = r
@@ -35,5 +35,4 @@ def gradient_conj(A, b, vis, max_iter=10, tol=1e-3):
     vis.add_result(GRAD_CONJ_NAME, CONVERGENCE_NAME, n_iter, error)
     last_iter = np.copy(x)
     n_iter += 1
-  print(n_iter)
   return vectorize_column_matrice(x)

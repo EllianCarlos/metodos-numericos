@@ -1,4 +1,5 @@
 from matplotlib import pyplot as plt
+import numpy as np
 
 
 class Visualizer:
@@ -41,16 +42,30 @@ class Visualizer:
       plt.plot(self.results[method][name]["x"],
                self.results[method][name]["y"],
                label=f'{method}')
+    plt.title("Gráficos de convergência")
     plt.legend(loc='upper right')
     plt.xlabel("Número de Iterações")
-    plt.title("Comparação entre métodos")
-    plt.ylabel(r"Erro absoluto $||x^{(k+1)} - x^{(k)}||$")
+    plt.ylabel(
+        r"Erro relativo $\dfrac{||x^{(k+1)} - x^{(k)}||}{||x^{(k+1)}||}$")
     plt.show()
 
   def set_limits(self, xmin=None, xmax=None, ymin=None, ymax=None):
     ax = plt.gca()
     ax.set_xlim([xmin, xmax])
     ax.set_ylim([ymin, ymax])
+
+  def print_errors(self, expected_x, given_x, labels):
+    errors = [(np.linalg.norm(x - expected_x, ord=1) /
+               np.linalg.norm(expected_x, ord=1)) for x in given_x]
+
+    fig, ax = plt.subplots()
+    fig.set_size_inches(10, 6)
+    fig.set_dpi(80)
+    ax.bar(labels, errors, width=0.1)
+    ax.set_title("Comparação de erro entre os métodos")
+    ax.set_ylabel(
+        r"Erro relativo $\dfrac{||x_{real} - x_{encontrado}||}{||x_{real}||}$")
+    plt.show()
 
   def reset(self):
     self.results = dict()
